@@ -60,7 +60,7 @@ export function TaskCard({ task, categories }: TaskCardProps) {
   return (
     <Card
       className={cn(
-        'flex flex-col transition-all duration-300',
+        'flex flex-col transition-all duration-300 w-full',
         task.completed ? 'bg-card/50 border-dashed' : 'bg-card',
         isPending && 'opacity-50'
       )}
@@ -82,7 +82,7 @@ export function TaskCard({ task, categories }: TaskCardProps) {
             {task.title}
           </CardTitle>
           <CardDescription
-            className={cn(
+            className={cn('text-sm',
               task.completed && 'line-through text-muted-foreground'
             )}
           >
@@ -119,13 +119,10 @@ export function TaskCard({ task, categories }: TaskCardProps) {
           )}
         </div>
         {category && (
-          <Badge
-            variant="outline"
-            className={cn(task.completed && 'bg-transparent')}
+           <Badge
+            style={{ backgroundColor: category.color }}
+            className={cn('text-white', task.completed && 'bg-opacity-50')}
           >
-            <span
-              className={cn('mr-2 h-2 w-2 rounded-full', category.color)}
-            ></span>
             {category.name}
           </Badge>
         )}

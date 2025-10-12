@@ -3,9 +3,9 @@
 import type { Todo, Category } from './types';
 
 const categoriesData: Category[] = [
-  { id: 'work', name: 'Work', color: 'bg-blue-500' },
-  { id: 'personal', name: 'Personal', color: 'bg-green-500' },
-  { id: 'errands', name: 'Errands', color: 'bg-yellow-500' },
+  { id: 'work', name: 'Work', color: '#3b82f6' },
+  { id: 'personal', name: 'Personal', color: '#22c55e' },
+  { id: 'errands', name: 'Errands', color: '#eab308' },
 ];
 
 const todosData: Todo[] = [
