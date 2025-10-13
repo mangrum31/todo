@@ -17,7 +17,6 @@ import Image from 'next/image';
 
 const GRID_SIZE = 3;
 const TILE_SIZE = 120;
-const IMAGE_URL = 'https://picsum.photos/seed/puzzle/360/360';
 
 interface Tile {
   id: number;
@@ -56,6 +55,10 @@ export function ImagePuzzle() {
   const [selectedTile, setSelectedTile] = useState<Tile | null>(null);
   const [isSolved, setIsSolved] = useState(false);
   const [moves, setMoves] = useState(0);
+  const [imageUrl, setImageUrl] = useState('');
+
+  const getNewImageUrl = () =>
+    `https://picsum.photos/seed/${Math.random()}/360/360`;
 
   useEffect(() => {
     resetGame();
@@ -68,6 +71,7 @@ export function ImagePuzzle() {
   }, [tiles]);
 
   const resetGame = () => {
+    setImageUrl(getNewImageUrl());
     setTiles(shuffleTiles(createTiles()));
     setSelectedTile(null);
     setIsSolved(false);
@@ -108,7 +112,7 @@ export function ImagePuzzle() {
               height: GRID_SIZE * TILE_SIZE,
             }}
           >
-            {tiles
+            {imageUrl && tiles
               .sort((a, b) => a.position - b.position)
               .map(tile => (
                 <div
@@ -127,7 +131,7 @@ export function ImagePuzzle() {
                   }}
                 >
                   <Image
-                    src={IMAGE_URL}
+                    src={imageUrl}
                     alt={`Tile ${tile.id}`}
                     width={GRID_SIZE * TILE_SIZE}
                     height={GRID_SIZE * TILE_SIZE}
