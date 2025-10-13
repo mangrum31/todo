@@ -17,6 +17,7 @@ import {
   BarChart3,
   ListTodo,
   Settings,
+  Puzzle,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -56,6 +57,18 @@ export function AppSidebar() {
               <Link href="/reports">
                 <BarChart3 />
                 <span>Reports</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              isActive={pathname === '/game'}
+              tooltip="Image Scramble"
+            >
+              <Link href="/game">
+                <Puzzle />
+                <span>Image Scramble</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

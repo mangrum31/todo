@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 const pathToTitle: { [key: string]: string } = {
   '/dashboard': 'Dashboard',
   '/reports': 'Reports',
+  '/game': 'Image Scramble',
 };
 
 export function PageHeader() {
