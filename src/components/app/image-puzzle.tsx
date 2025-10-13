@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -26,7 +26,6 @@ import { PlaceHolderImages, type ImagePlaceholder } from '@/lib/placeholder-imag
 import { Eye } from 'lucide-react';
 
 const GRID_SIZE = 3;
-const TILE_SIZE = 100;
 
 interface Tile {
   id: number;
@@ -35,14 +34,14 @@ interface Tile {
   y: number;
 }
 
-const createTiles = (): Tile[] => {
+const createTiles = (tileSize: number): Tile[] => {
   const tiles: Tile[] = [];
   for (let i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
     tiles.push({
       id: i,
       position: i,
-      x: (i % GRID_SIZE) * TILE_SIZE,
-      y: Math.floor(i / GRID_SIZE) * TILE_SIZE,
+      x: (i % GRID_SIZE) * tileSize,
+      y: Math.floor(i / GRID_SIZE) * tileSize,
     });
   }
   return tiles;
@@ -96,6 +95,24 @@ export function ImagePuzzle() {
   const [moves, setMoves] = useState(0);
   const [puzzleImages] = useState<ImagePlaceholder[]>(PlaceHolderImages);
   const [currentImage, setCurrentImage] = useState<ImagePlaceholder | null>(null);
+  const [containerWidth, setContainerWidth] = useState(300);
+
+  const puzzleSize = useMemo(() => Math.min(containerWidth, 500), [containerWidth]);
+  const tileSize = useMemo(() => puzzleSize / GRID_SIZE, [puzzleSize]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const parent = document.getElementById('puzzle-container');
+      if (parent) {
+        setContainerWidth(parent.clientWidth);
+      }
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+
+  }, []);
 
   useEffect(() => {
     if (puzzleImages.length > 0 && !currentImage) {
@@ -107,7 +124,7 @@ export function ImagePuzzle() {
     if (currentImage) {
       resetGame();
     }
-  }, [currentImage]);
+  }, [currentImage, tileSize]);
 
   useEffect(() => {
     if (tiles.length > 0 && !isSolved && checkWin()) {
@@ -116,7 +133,7 @@ export function ImagePuzzle() {
   }, [tiles, isSolved]);
 
   const resetGame = () => {
-    setTiles(shuffleTiles(createTiles()));
+    setTiles(shuffleTiles(createTiles(tileSize)));
     setSelectedTile(null);
     setIsSolved(false);
     setMoves(0);
@@ -165,10 +182,8 @@ export function ImagePuzzle() {
     }
   };
 
-  const puzzleSize = GRID_SIZE * TILE_SIZE;
-
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div id="puzzle-container" className="flex flex-col items-center gap-6 w-full px-4">
        <div className="w-full max-w-md">
         <Select onValueChange={handleImageChange} value={currentImage?.id || ''}>
           <SelectTrigger>
@@ -185,7 +200,7 @@ export function ImagePuzzle() {
       </div>
 
       <Card>
-        <CardContent className="p-2">
+        <CardContent className="p-1 sm:p-2">
           <div
             className="relative grid"
             style={{
@@ -206,8 +221,8 @@ export function ImagePuzzle() {
                     selectedTile?.id === tile.id && 'ring-4 ring-primary ring-inset z-20 scale-105'
                   )}
                   style={{
-                    width: TILE_SIZE,
-                    height: TILE_SIZE,
+                    width: tileSize,
+                    height: tileSize,
                     overflow: 'hidden',
                     position: 'relative',
                   }}
@@ -230,7 +245,7 @@ export function ImagePuzzle() {
           </div>
         </CardContent>
       </Card>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center justify-center flex-wrap gap-4">
         <p className="text-lg font-medium">Moves: <span className="font-bold text-primary">{moves}</span></p>
         <Button onClick={handleNewGameClick}>New Game</Button>
         <AlertDialog>
@@ -254,7 +269,7 @@ export function ImagePuzzle() {
                   alt="Solved puzzle hint"
                   width={300}
                   height={300}
-                  className="rounded-md border"
+                  className="rounded-md border max-w-full h-auto"
                   data-ai-hint={currentImage.imageHint}
                 />
               </div>
@@ -281,4 +296,3 @@ export function ImagePuzzle() {
       </AlertDialog>
     </div>
   );
-}
