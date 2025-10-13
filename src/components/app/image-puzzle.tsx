@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -12,8 +12,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import { PlaceHolderImages, type ImagePlaceholder } from '@/lib/placeholder-images';
 
 const GRID_SIZE = 3;
 const TILE_SIZE = 120;
@@ -40,7 +48,8 @@ const createTiles = (): Tile[] => {
 
 const shuffleTiles = (tiles: Tile[]): Tile[] => {
   const shuffled = [...tiles];
-  for (let i = shuffled.length - 1; i > 0; i--) {
+  // Don't shuffle the last tile to ensure the puzzle is always solvable
+  for (let i = shuffled.length - 2; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i].position, shuffled[j].position] = [
       shuffled[j].position,
@@ -55,28 +64,37 @@ export function ImagePuzzle() {
   const [selectedTile, setSelectedTile] = useState<Tile | null>(null);
   const [isSolved, setIsSolved] = useState(false);
   const [moves, setMoves] = useState(0);
-  const [imageUrl, setImageUrl] = useState('');
-
-  const getNewImageUrl = () =>
-    `https://picsum.photos/seed/${Math.random()}/360/360`;
+  const [puzzleImages] = useState<ImagePlaceholder[]>(PlaceHolderImages);
+  const [currentImage, setCurrentImage] = useState<ImagePlaceholder | null>(null);
 
   useEffect(() => {
-    resetGame();
-  }, []);
+    if (puzzleImages.length > 0) {
+      setCurrentImage(puzzleImages[0]);
+    }
+  }, [puzzleImages]);
 
   useEffect(() => {
-    if (tiles.length > 0 && checkWin()) {
+    if (currentImage) {
+      resetGame();
+    }
+  }, [currentImage]);
+
+  useEffect(() => {
+    if (tiles.length > 0 && !isSolved && checkWin()) {
       setIsSolved(true);
     }
-  }, [tiles]);
+  }, [tiles, isSolved]);
 
   const resetGame = () => {
-    setImageUrl(getNewImageUrl());
     setTiles(shuffleTiles(createTiles()));
     setSelectedTile(null);
     setIsSolved(false);
     setMoves(0);
   };
+  
+  const handleNewGameClick = () => {
+    resetGame();
+  }
 
   const checkWin = () => {
     return tiles.every(tile => tile.id === tile.position);
@@ -86,7 +104,6 @@ export function ImagePuzzle() {
     if (isSolved) return;
 
     if (selectedTile) {
-      // Swap positions
       const newTiles = tiles.map(t => {
         if (t.id === selectedTile.id) return { ...t, position: tile.position };
         if (t.id === tile.id) return { ...t, position: selectedTile.position };
@@ -100,8 +117,30 @@ export function ImagePuzzle() {
     }
   };
 
+  const handleImageChange = (imageId: string) => {
+    const newImage = puzzleImages.find(img => img.id === imageId);
+    if (newImage) {
+      setCurrentImage(newImage);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center gap-6">
+       <div className="w-full max-w-sm">
+        <Select onValueChange={handleImageChange} defaultValue={currentImage?.id}>
+          <SelectTrigger>
+            <SelectValue placeholder="Choose a puzzle image" />
+          </SelectTrigger>
+          <SelectContent>
+            {puzzleImages.map(image => (
+              <SelectItem key={image.id} value={image.id}>
+                {image.description}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
       <Card>
         <CardContent className="p-2">
           <div
@@ -112,7 +151,7 @@ export function ImagePuzzle() {
               height: GRID_SIZE * TILE_SIZE,
             }}
           >
-            {imageUrl && tiles
+            {currentImage && tiles
               .sort((a, b) => a.position - b.position)
               .map(tile => (
                 <div
@@ -131,7 +170,7 @@ export function ImagePuzzle() {
                   }}
                 >
                   <Image
-                    src={imageUrl}
+                    src={currentImage.imageUrl}
                     alt={`Tile ${tile.id}`}
                     width={GRID_SIZE * TILE_SIZE}
                     height={GRID_SIZE * TILE_SIZE}
@@ -141,6 +180,7 @@ export function ImagePuzzle() {
                       top: -tile.y,
                     }}
                     priority
+                    data-ai-hint={currentImage.imageHint}
                   />
                 </div>
               ))}
@@ -149,10 +189,10 @@ export function ImagePuzzle() {
       </Card>
       <div className="flex items-center gap-4">
         <p className="text-lg font-medium">Moves: <span className="font-bold text-primary">{moves}</span></p>
-        <Button onClick={resetGame}>New Game</Button>
+        <Button onClick={handleNewGameClick}>New Game</Button>
       </div>
       
-      <AlertDialog open={isSolved} onOpenChange={setIsSolved}>
+      <AlertDialog open={isSolved} onOpenChange={(open) => !open && handleNewGameClick()}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Congratulations!</AlertDialogTitle>
@@ -161,7 +201,7 @@ export function ImagePuzzle() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={resetGame}>Play Again</AlertDialogAction>
+            <AlertDialogAction onClick={handleNewGameClick}>Play Again</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

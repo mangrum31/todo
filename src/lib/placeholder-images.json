@@ -1,3 +1,34 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "1",
+      "description": "Cute Puppy",
+      "imageUrl": "https://picsum.photos/seed/puppy/360/360",
+      "imageHint": "cute puppy"
+    },
+    {
+      "id": "2",
+      "description": "Majestic Mountain",
+      "imageUrl": "https://picsum.photos/seed/mountain/360/360",
+      "imageHint": "majestic mountain"
+    },
+    {
+      "id": "3",
+      "description": "Serene Beach",
+      "imageUrl": "https://picsum.photos/seed/beach/360/360",
+      "imageHint": "serene beach"
+    },
+    {
+      "id": "4",
+      "description": "Vibrant Forest",
+      "imageUrl": "https://picsum.photos/seed/forest/360/360",
+      "imageHint": "vibrant forest"
+    },
+    {
+      "id": "5",
+      "description": "Abstract Colors",
+      "imageUrl": "https://picsum.photos/seed/colors/360/360",
+      "imageHint": "abstract colors"
+    }
+  ]
 }
