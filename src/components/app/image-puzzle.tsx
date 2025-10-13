@@ -25,7 +25,7 @@ import Image from 'next/image';
 import { PlaceHolderImages, type ImagePlaceholder } from '@/lib/placeholder-images';
 import { Eye } from 'lucide-react';
 
-const GRID_SIZE = 4;
+const GRID_SIZE = 3;
 const TILE_SIZE = 100;
 
 interface Tile {
@@ -67,20 +67,19 @@ const shuffleTiles = (tiles: Tile[]): Tile[] => {
         currentIndex -= 1;
     }
 
-    // Simple check for solvability for even grid sizes, might need enhancement
-    // For this demo, we assume the shuffle is likely solvable. A true solvable shuffle is more complex.
-    if (GRID_SIZE % 2 === 0) {
-        let inversions = 0;
-        for (let i = 0; i < shuffled.length - 1; i++) {
-            for (let j = i + 1; j < shuffled.length; j++) {
-                if (shuffled[i].position > shuffled[j].position) {
-                    inversions++;
-                }
+    // Simple check for solvability for odd grid sizes
+    let inversions = 0;
+    for (let i = 0; i < shuffled.length - 1; i++) {
+        for (let j = i + 1; j < shuffled.length; j++) {
+            if (shuffled[i].position > shuffled[j].position) {
+                inversions++;
             }
         }
-        // This is a simplified check. A full check is more involved.
-        // If not solvable, we can just do one more swap to make it solvable.
-        if(inversions % 2 !== 0) {
+    }
+
+    if (inversions % 2 !== 0) {
+        // If not solvable (odd number of inversions for an odd grid), perform one swap to make it solvable.
+        if (shuffled.length >= 2) {
             [shuffled[0].position, shuffled[1].position] = [shuffled[1].position, shuffled[0].position];
         }
     }
@@ -208,7 +207,7 @@ export function ImagePuzzle() {
                   }}
                 >
                   <Image
-                    src={currentImage.imageUrl}
+                    src={currentImage.imageUrl.replace('/600/600', `/${puzzleSize}/${puzzleSize}`)}
                     alt={`Tile ${tile.id}`}
                     width={puzzleSize}
                     height={puzzleSize}
@@ -245,7 +244,7 @@ export function ImagePuzzle() {
             {currentImage && (
               <div className="flex justify-center items-center p-4">
                 <Image
-                  src={currentImage.imageUrl}
+                  src={currentImage.imageUrl.replace('/600/600', '/300/300')}
                   alt="Solved puzzle hint"
                   width={300}
                   height={300}
