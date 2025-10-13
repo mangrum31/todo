@@ -2,63 +2,309 @@
   "placeholderImages": [
     {
       "id": "1",
-      "description": "Cute Puppy",
-      "imageUrl": "https://picsum.photos/seed/puppy/600/600",
-      "imageHint": "cute puppy"
+      "description": "Lighthouse at Sunset",
+      "imageUrl": "https://picsum.photos/seed/lighthouse/600/600",
+      "imageHint": "lighthouse sunset"
     },
     {
       "id": "2",
-      "description": "Majestic Mountain",
-      "imageUrl": "https://picsum.photos/seed/mountain/600/600",
-      "imageHint": "majestic mountain"
+      "description": "Snowy Mountain Peak",
+      "imageUrl": "https://picsum.photos/seed/peak/600/600",
+      "imageHint": "snowy mountain"
     },
     {
       "id": "3",
-      "description": "Serene Beach",
-      "imageUrl": "https://picsum.photos/seed/beach/600/600",
-      "imageHint": "serene beach"
+      "description": "Tropical Beach Paradise",
+      "imageUrl": "https://picsum.photos/seed/paradise/600/600",
+      "imageHint": "tropical beach"
     },
     {
       "id": "4",
-      "description": "Vibrant Forest",
-      "imageUrl": "https://picsum.photos/seed/forest/600/600",
-      "imageHint": "vibrant forest"
+      "description": "Ancient Castle Ruins",
+      "imageUrl": "https://picsum.photos/seed/ruins/600/600",
+      "imageHint": "castle ruins"
     },
     {
       "id": "5",
-      "description": "Abstract Colors",
-      "imageUrl": "https://picsum.photos/seed/colors/600/600",
-      "imageHint": "abstract colors"
+      "description": "Bustling Cityscape",
+      "imageUrl": "https://picsum.photos/seed/cityscape/600/600",
+      "imageHint": "bustling city"
     },
     {
       "id": "6",
-      "description": "City at Night",
-      "imageUrl": "https://picsum.photos/seed/city/600/600",
-      "imageHint": "city night"
+      "description": "Red Fox in the Wild",
+      "imageUrl": "https://picsum.photos/seed/fox/600/600",
+      "imageHint": "red fox"
     },
     {
       "id": "7",
-      "description": "Galaxy View",
-      "imageUrl": "https://picsum.photos/seed/galaxy/600/600",
-      "imageHint": "galaxy space"
+      "description": "Hot Air Balloons",
+      "imageUrl": "https://picsum.photos/seed/balloons/600/600",
+      "imageHint": "hot air"
     },
     {
       "id": "8",
-      "description": "Cute Kitten",
-      "imageUrl": "https://picsum.photos/seed/kitten/600/600",
-      "imageHint": "cute kitten"
+      "description": "Peaceful Koi Pond",
+      "imageUrl": "https://picsum.photos/seed/koi/600/600",
+      "imageHint": "koi pond"
     },
     {
       "id": "9",
+      "description": "Vintage Car",
+      "imageUrl": "https://picsum.photos/seed/vintagecar/600/600",
+      "imageHint": "vintage car"
+    },
+    {
+      "id": "10",
+      "description": "Starry Night Sky",
+      "imageUrl": "https://picsum.photos/seed/stars/600/600",
+      "imageHint": "night sky"
+    },
+    {
+      "id": "11",
+      "description": "Autumn Forest Path",
+      "imageUrl": "https://picsum.photos/seed/autumnpath/600/600",
+      "imageHint": "autumn forest"
+    },
+    {
+      "id": "12",
+      "description": "Majestic Elephant",
+      "imageUrl": "https://picsum.photos/seed/elephant/600/600",
+      "imageHint": "majestic elephant"
+    },
+    {
+      "id": "13",
       "description": "Modern Architecture",
       "imageUrl": "https://picsum.photos/seed/architecture/600/600",
       "imageHint": "modern architecture"
     },
     {
-      "id": "10",
+      "id": "14",
+      "description": "Gourmet Burger",
+      "imageUrl": "https://picsum.photos/seed/burger/600/600",
+      "imageHint": "gourmet burger"
+    },
+    {
+      "id": "15",
+      "description": "Playful Dolphin",
+      "imageUrl": "https://picsum.photos/seed/dolphin/600/600",
+      "imageHint": "playful dolphin"
+    },
+    {
+      "id": "16",
+      "description": "Desert Sand Dunes",
+      "imageUrl": "https://picsum.photos/seed/dunes/600/600",
+      "imageHint": "desert dunes"
+    },
+    {
+      "id": "17",
+      "description": "Electric Guitar",
+      "imageUrl": "https://picsum.photos/seed/guitar/600/600",
+      "imageHint": "electric guitar"
+    },
+    {
+      "id": "18",
+      "description": "Stunning Waterfall",
+      "imageUrl": "https://picsum.photos/seed/waterfall/600/600",
+      "imageHint": "stunning waterfall"
+    },
+    {
+      "id": "19",
+      "description": "Cozy Fireplace",
+      "imageUrl": "https://picsum.photos/seed/fireplace/600/600",
+      "imageHint": "cozy fireplace"
+    },
+    {
+      "id": "20",
+      "description": "Chess Board",
+      "imageUrl": "https://picsum.photos/seed/chess/600/600",
+      "imageHint": "chess board"
+    },
+    {
+      "id": "21",
+      "description": "Soaring Eagle",
+      "imageUrl": "https://picsum.photos/seed/eagle/600/600",
+      "imageHint": "soaring eagle"
+    },
+    {
+      "id": "22",
+      "description": "Old Library",
+      "imageUrl": "https://picsum.photos/seed/library/600/600",
+      "imageHint": "old library"
+    },
+    {
+      "id": "23",
+      "description": "Colorful Macarons",
+      "imageUrl": "https://picsum.photos/seed/macarons/600/600",
+      "imageHint": "colorful macarons"
+    },
+    {
+      "id": "24",
+      "description": "Japanese Garden",
+      "imageUrl": "https://picsum.photos/seed/japangarden/600/600",
+      "imageHint": "japanese garden"
+    },
+    {
+      "id": "25",
+      "description": "Sailing Boat at Sea",
+      "imageUrl": "https://picsum.photos/seed/sailing/600/600",
+      "imageHint": "sailing boat"
+    },
+    {
+      "id": "26",
+      "description": "Cute Panda",
+      "imageUrl": "https://picsum.photos/seed/panda/600/600",
+      "imageHint": "cute panda"
+    },
+    {
+      "id": "27",
+      "description": "Venice Canal",
+      "imageUrl": "https://picsum.photos/seed/venice/600/600",
+      "imageHint": "venice canal"
+    },
+    {
+      "id": "28",
+      "description": "Field of Sunflowers",
+      "imageUrl": "https://picsum.photos/seed/sunflowers/600/600",
+      "imageHint": "field sunflowers"
+    },
+    {
+      "id": "29",
+      "description": "Northern Lights",
+      "imageUrl": "https://picsum.photos/seed/aurora/600/600",
+      "imageHint": "northern lights"
+    },
+    {
+      "id": "30",
+      "description": "Steam Train",
+      "imageUrl": "https://picsum.photos/seed/train/600/600",
+      "imageHint": "steam train"
+    },
+    {
+      "id": "31",
+      "description": "Coral Reef",
+      "imageUrl": "https://picsum.photos/seed/reef/600/600",
+      "imageHint": "coral reef"
+    },
+    {
+      "id": "32",
+      "description": "Space Shuttle Launch",
+      "imageUrl": "https://picsum.photos/seed/shuttle/600/600",
+      "imageHint": "space shuttle"
+    },
+    {
+      "id": "33",
+      "description": "Rainforest Canopy",
+      "imageUrl": "https://picsum.photos/seed/canopy/600/600",
+      "imageHint": "rainforest canopy"
+    },
+    {
+      "id": "34",
+      "description": "Skiing on a Slope",
+      "imageUrl": "https://picsum.photos/seed/skiing/600/600",
+      "imageHint": "person skiing"
+    },
+    {
+      "id": "35",
+      "description": "Artist's Paint Brushes",
+      "imageUrl": "https://picsum.photos/seed/brushes/600/600",
+      "imageHint": "paint brushes"
+    },
+    {
+      "id": "36",
+      "description": "Galaxy View",
+      "imageUrl": "https://picsum.photos/seed/galaxy/600/600",
+      "imageHint": "galaxy space"
+    },
+    {
+      "id": "37",
+      "description": "Cute Kitten",
+      "imageUrl": "https://picsum.photos/seed/kitten/600/600",
+      "imageHint": "cute kitten"
+    },
+    {
+      "id": "38",
       "description": "Delicious Food",
       "imageUrl": "https://picsum.photos/seed/food/600/600",
       "imageHint": "delicious food"
+    },
+    {
+      "id": "39",
+      "description": "Jellyfish",
+      "imageUrl": "https://picsum.photos/seed/jellyfish/600/600",
+      "imageHint": "glowing jellyfish"
+    },
+    {
+      "id": "40",
+      "description": "New York Taxi",
+      "imageUrl": "https://picsum.photos/seed/taxi/600/600",
+      "imageHint": "new york"
+    },
+    {
+      "id": "41",
+      "description": "Old Pocket Watch",
+      "imageUrl": "https://picsum.photos/seed/watch/600/600",
+      "imageHint": "pocket watch"
+    },
+    {
+      "id": "42",
+      "description": "Wolf in Snow",
+      "imageUrl": "https://picsum.photos/seed/wolf/600/600",
+      "imageHint": "wolf snow"
+    },
+    {
+      "id": "43",
+      "description": "Bonsai Tree",
+      "imageUrl": "https://picsum.photos/seed/bonsai/600/600",
+      "imageHint": "bonsai tree"
+    },
+    {
+      "id": "44",
+      "description": "Pottery Making",
+      "imageUrl": "https://picsum.photos/seed/pottery/600/600",
+      "imageHint": "pottery making"
+    },
+    {
+      "id": "45",
+      "description": "Monarch Butterfly",
+      "imageUrl": "https://picsum.photos/seed/butterfly/600/600",
+      "imageHint": "monarch butterfly"
+    },
+    {
+      "id": "46",
+      "description": "Classic Violin",
+      "imageUrl": "https://picsum.photos/seed/violin/600/600",
+      "imageHint": "classic violin"
+    },
+    {
+      "id": "47",
+      "description": "Canyon Landscape",
+      "imageUrl": "https://picsum.photos/seed/canyon/600/600",
+      "imageHint": "canyon landscape"
+    },
+    {
+      "id": "48",
+      "description": "Peacock Feathers",
+      "imageUrl": "https://picsum.photos/seed/peacock/600/600",
+      "imageHint": "peacock feathers"
+    },
+    {
+      "id": "49",
+      "description": "Surfer on a Wave",
+      "imageUrl": "https://picsum.photos/seed/surfer/600/600",
+      "imageHint": "surfer wave"
+    },
+    {
+      "id": "50",
+      "description": "Espresso Machine",
+      "imageUrl": "https://picsum.photos/seed/espresso/600/600",
+      "imageHint": "espresso machine"
+    },
+    {
+      "id": "51",
+      "description": "Great Wall of China",
+      "imageUrl": "https://picsum.photos/seed/greatwall/600/600",
+      "imageHint": "great wall"
     }
   ]
 }

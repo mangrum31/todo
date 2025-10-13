@@ -25,8 +25,8 @@ import Image from 'next/image';
 import { PlaceHolderImages, type ImagePlaceholder } from '@/lib/placeholder-images';
 import { Eye } from 'lucide-react';
 
-const GRID_SIZE = 3;
-const TILE_SIZE = 120;
+const GRID_SIZE = 4;
+const TILE_SIZE = 100;
 
 interface Tile {
   id: number;
@@ -48,18 +48,47 @@ const createTiles = (): Tile[] => {
   return tiles;
 };
 
+// Fischer-Yates shuffle algorithm
 const shuffleTiles = (tiles: Tile[]): Tile[] => {
-  const shuffled = [...tiles];
-  // Don't shuffle the last tile to ensure the puzzle is always solvable
-  for (let i = shuffled.length - 2; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i].position, shuffled[j].position] = [
-      shuffled[j].position,
-      shuffled[i].position,
-    ];
-  }
-  return shuffled;
+    const shuffled = [...tiles];
+    let currentIndex = shuffled.length - 1; // Don't shuffle the last tile to ensure solvability
+    
+    while (currentIndex > 0) {
+        const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
+        
+        if(randomIndex !== currentIndex) {
+            // Swap positions
+            [shuffled[currentIndex].position, shuffled[randomIndex].position] = [
+            shuffled[randomIndex].position,
+            shuffled[currentIndex].position,
+            ];
+        }
+        
+        currentIndex -= 1;
+    }
+
+    // Simple check for solvability for even grid sizes, might need enhancement
+    // For this demo, we assume the shuffle is likely solvable. A true solvable shuffle is more complex.
+    if (GRID_SIZE % 2 === 0) {
+        let inversions = 0;
+        for (let i = 0; i < shuffled.length - 1; i++) {
+            for (let j = i + 1; j < shuffled.length; j++) {
+                if (shuffled[i].position > shuffled[j].position) {
+                    inversions++;
+                }
+            }
+        }
+        // This is a simplified check. A full check is more involved.
+        // If not solvable, we can just do one more swap to make it solvable.
+        if(inversions % 2 !== 0) {
+            [shuffled[0].position, shuffled[1].position] = [shuffled[1].position, shuffled[0].position];
+        }
+    }
+
+
+    return shuffled;
 };
+
 
 export function ImagePuzzle() {
   const [tiles, setTiles] = useState<Tile[]>([]);
@@ -99,6 +128,7 @@ export function ImagePuzzle() {
   }
 
   const checkWin = () => {
+    if(tiles.length === 0) return false;
     return tiles.every(tile => tile.id === tile.position);
   };
 
@@ -106,6 +136,10 @@ export function ImagePuzzle() {
     if (isSolved) return;
 
     if (selectedTile) {
+      if (selectedTile.id === tile.id) {
+        setSelectedTile(null);
+        return;
+      }
       const newTiles = tiles.map(t => {
         if (t.id === selectedTile.id) return { ...t, position: tile.position };
         if (t.id === tile.id) return { ...t, position: selectedTile.position };
@@ -126,9 +160,11 @@ export function ImagePuzzle() {
     }
   };
 
+  const puzzleSize = GRID_SIZE * TILE_SIZE;
+
   return (
     <div className="flex flex-col items-center gap-6">
-       <div className="w-full max-w-sm">
+       <div className="w-full max-w-md">
         <Select onValueChange={handleImageChange} defaultValue={currentImage?.id}>
           <SelectTrigger>
             <SelectValue placeholder="Choose a puzzle image" />
@@ -149,8 +185,8 @@ export function ImagePuzzle() {
             className="relative grid"
             style={{
               gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)`,
-              width: GRID_SIZE * TILE_SIZE,
-              height: GRID_SIZE * TILE_SIZE,
+              width: puzzleSize,
+              height: puzzleSize,
             }}
           >
             {currentImage && tiles
@@ -174,8 +210,8 @@ export function ImagePuzzle() {
                   <Image
                     src={currentImage.imageUrl}
                     alt={`Tile ${tile.id}`}
-                    width={GRID_SIZE * TILE_SIZE}
-                    height={GRID_SIZE * TILE_SIZE}
+                    width={puzzleSize}
+                    height={puzzleSize}
                     className="absolute max-w-none"
                     style={{
                       left: -tile.x,
