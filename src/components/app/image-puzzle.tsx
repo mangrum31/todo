@@ -99,7 +99,7 @@ export function ImagePuzzle() {
 
   useEffect(() => {
     if (puzzleImages.length > 0 && !currentImage) {
-      setCurrentImage(puzzleImages[0]);
+      setCurrentImage(puzzleImages[Math.floor(Math.random() * puzzleImages.length)]);
     }
   }, [puzzleImages, currentImage]);
 
@@ -123,7 +123,13 @@ export function ImagePuzzle() {
   };
   
   const handleNewGameClick = () => {
-    resetGame();
+    let newImage = currentImage;
+    if (puzzleImages.length > 1) {
+      while (newImage?.id === currentImage?.id) {
+        newImage = puzzleImages[Math.floor(Math.random() * puzzleImages.length)];
+      }
+    }
+    setCurrentImage(newImage);
   }
 
   const checkWin = () => {
@@ -164,7 +170,7 @@ export function ImagePuzzle() {
   return (
     <div className="flex flex-col items-center gap-6">
        <div className="w-full max-w-md">
-        <Select onValueChange={handleImageChange} defaultValue={currentImage?.id}>
+        <Select onValueChange={handleImageChange} value={currentImage?.id || ''}>
           <SelectTrigger>
             <SelectValue placeholder="Choose a puzzle image" />
           </SelectTrigger>
