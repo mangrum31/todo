@@ -82,7 +82,7 @@ export function TaskCard({ task, categories }: TaskCardProps) {
             {task.title}
           </CardTitle>
           <CardDescription
-            className={cn('text-sm',
+            className={cn('text-base',
               task.completed && 'line-through text-muted-foreground'
             )}
           >

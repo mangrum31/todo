@@ -113,7 +113,7 @@ export function TaskBoard({ initialTasks, categories }: TaskBoardProps) {
             </AccordionTrigger>
             <AccordionContent className="bg-card p-4 rounded-b-lg">
               {tasks.length > 0 ? (
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {tasks
                     .sort((a, b) => (a.dueDate?.getTime() || Infinity) - (b.dueDate?.getTime() || Infinity))
                     .map(task => (
