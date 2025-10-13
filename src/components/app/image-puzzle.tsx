@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -11,6 +11,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
+  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import {
   Select,
@@ -22,6 +23,7 @@ import {
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { PlaceHolderImages, type ImagePlaceholder } from '@/lib/placeholder-images';
+import { Eye } from 'lucide-react';
 
 const GRID_SIZE = 3;
 const TILE_SIZE = 120;
@@ -68,10 +70,10 @@ export function ImagePuzzle() {
   const [currentImage, setCurrentImage] = useState<ImagePlaceholder | null>(null);
 
   useEffect(() => {
-    if (puzzleImages.length > 0) {
+    if (puzzleImages.length > 0 && !currentImage) {
       setCurrentImage(puzzleImages[0]);
     }
-  }, [puzzleImages]);
+  }, [puzzleImages, currentImage]);
 
   useEffect(() => {
     if (currentImage) {
@@ -190,6 +192,37 @@ export function ImagePuzzle() {
       <div className="flex items-center gap-4">
         <p className="text-lg font-medium">Moves: <span className="font-bold text-primary">{moves}</span></p>
         <Button onClick={handleNewGameClick}>New Game</Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="outline">
+              <Eye className="mr-2 h-4 w-4" />
+              Hint
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Hint: The Solved Puzzle</AlertDialogTitle>
+              <AlertDialogDescription>
+                Here is what the final image should look like.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            {currentImage && (
+              <div className="flex justify-center items-center p-4">
+                <Image
+                  src={currentImage.imageUrl}
+                  alt="Solved puzzle hint"
+                  width={300}
+                  height={300}
+                  className="rounded-md border"
+                  data-ai-hint={currentImage.imageHint}
+                />
+              </div>
+            )}
+            <AlertDialogFooter>
+              <AlertDialogAction>Got it!</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
       
       <AlertDialog open={isSolved} onOpenChange={(open) => !open && handleNewGameClick()}>

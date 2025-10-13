@@ -3,32 +3,62 @@
     {
       "id": "1",
       "description": "Cute Puppy",
-      "imageUrl": "https://picsum.photos/seed/puppy/360/360",
+      "imageUrl": "https://picsum.photos/seed/puppy/600/600",
       "imageHint": "cute puppy"
     },
     {
       "id": "2",
       "description": "Majestic Mountain",
-      "imageUrl": "https://picsum.photos/seed/mountain/360/360",
+      "imageUrl": "https://picsum.photos/seed/mountain/600/600",
       "imageHint": "majestic mountain"
     },
     {
       "id": "3",
       "description": "Serene Beach",
-      "imageUrl": "https://picsum.photos/seed/beach/360/360",
+      "imageUrl": "https://picsum.photos/seed/beach/600/600",
       "imageHint": "serene beach"
     },
     {
       "id": "4",
       "description": "Vibrant Forest",
-      "imageUrl": "https://picsum.photos/seed/forest/360/360",
+      "imageUrl": "https://picsum.photos/seed/forest/600/600",
       "imageHint": "vibrant forest"
     },
     {
       "id": "5",
       "description": "Abstract Colors",
-      "imageUrl": "https://picsum.photos/seed/colors/360/360",
+      "imageUrl": "https://picsum.photos/seed/colors/600/600",
       "imageHint": "abstract colors"
+    },
+    {
+      "id": "6",
+      "description": "City at Night",
+      "imageUrl": "https://picsum.photos/seed/city/600/600",
+      "imageHint": "city night"
+    },
+    {
+      "id": "7",
+      "description": "Galaxy View",
+      "imageUrl": "https://picsum.photos/seed/galaxy/600/600",
+      "imageHint": "galaxy space"
+    },
+    {
+      "id": "8",
+      "description": "Cute Kitten",
+      "imageUrl": "https://picsum.photos/seed/kitten/600/600",
+      "imageHint": "cute kitten"
+    },
+    {
+      "id": "9",
+      "description": "Modern Architecture",
+      "imageUrl": "https://picsum.photos/seed/architecture/600/600",
+      "imageHint": "modern architecture"
+    },
+    {
+      "id": "10",
+      "description": "Delicious Food",
+      "imageUrl": "https://picsum.photos/seed/food/600/600",
+      "imageHint": "delicious food"
     }
   ]
 }
