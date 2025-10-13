@@ -296,3 +296,4 @@ export function ImagePuzzle() {
       </AlertDialog>
     </div>
   );
+}
